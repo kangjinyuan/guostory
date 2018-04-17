@@ -1,6 +1,6 @@
-//var url = "https://admin.guostory.com/";
+var url = "https://admin.guostory.com/";
 //var url = "https://xcx.guostory.com/";
-var url = "http://10.96.155.105:8080/storytree/";
+//var url = "http://10.96.155.105:8080/storytree/";
 var setData;
 var index = parent.layer.getFrameIndex(window.name);
 //初始化vue
