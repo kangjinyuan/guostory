@@ -141,6 +141,13 @@
 	<script src="../js/jquery.form.js"></script>
 	<script src="../js/comment.js"></script>
 	<script>
+		function downerweima() {
+			var canvas = $('#QRCode').find("canvas").get(0);
+			var saveurl = canvas.toDataURL('image/png');
+			$("#download").attr("download", $("#Name").val());
+			$("#download").attr('href', saveurl).get(0).click();
+			return false;
+		}
 		//		新建song
 		function save() {
 			var checkI = checkInput();

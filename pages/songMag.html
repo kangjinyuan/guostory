@@ -164,7 +164,7 @@
 								layerdom.find("#QRCodesave").show();
 								layerdom.find("#QRCode").qrcode({
 									render: "canvas",
-									text: "http://www.guostory.com/audioPlayer.html?mid=" + data.data.id,
+									text: url+"share/player.html?melodyId=" + data.data.id+"&melodyAlbum="+data.data.melodyAlbum,
 									width: "100", //二维码的宽度
 									height: "100", //二维码的高度
 									background: "#ffffff", //二维码的后景色
@@ -178,13 +178,6 @@
 			})
 		}
 
-		function downerweima() {
-			var canvas = $('#QRCode').find("canvas").get(0);
-			var saveurl = canvas.toDataURL('image/png');
-			$("#download").attr("download", $("#Name").val());
-			$("#download").attr('href', saveurl).get(0).click();
-			return false;
-		}
 		//删除数据
 		function deldata() {
 			if(delidList.length == 0) {
