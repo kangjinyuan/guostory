@@ -5,20 +5,19 @@
 .KJYBOX{width: 100%;overflow: hidden;display: none;}
 /*首页*/
 .index{width: 100%;overflow:hidden;margin: 0px auto;}
-.index_nav{width:90%;margin:0px auto;padding:20px 0px;height: 101px;}
-.index_nav li{width:25%;height: 80px;float: left;cursor: pointer;}
-.index_nav li:last-child{margin-right: 0px;}
-.index_nav .index_navlist{width: 90%;height: 100%;margin: 0px auto;border: 1px solid #ccc;}
-.index_nav .songicon{width: 40%;height: 100%;background: url(../img/songicon.png) center center no-repeat;background-size: 100% 100%;}
-.index_nav .classifyicon{width: 40%;height: 100%;background: url(../img/classifyicon.png) center center no-repeat;background-size: 100% 100%;}
-.index_nav .albumicon{width: 40%;height: 100%;background: url(../img/albumicon.png) center center no-repeat;background-size: 100% 100%;}
-.index_nav .usericon{width: 40%;height: 100%;background: url(../img/usericon.png) center center no-repeat;background-size: 100% 100%;}
-.index_nav li .tabtext{display:none;width: 60%;height: 100%;float: left;}
-.index_nav li .tabtext p:nth-child(1){width: 100%;overflow:hidden;font: 22px/48px 黑体;color: #333;text-align: center;}
-.index_nav li .tabtext p:nth-child(2){width: 100%;overflow:hidden;font: 14px/19px 黑体;color: #616169;text-align: center;}
-.index .usercount{width: 90%;margin:0px auto;overflow: hidden;}
-.index .usercount .usercount_title{width: 100%;height: 70px;font: 15px/100px 黑体;color: #333;}
-.index .usercount .usercount_echart{width: 100%;height: 500px;}
+.indexbg{width: 100%;height: 100%;background: url(../img/indexbg.png) no-repeat;background-size:100% 100%;position: absolute;top: 0px;left: 0px;}
+.index_nav{width:400px;padding:8px;overflow:hidden;position: absolute;top: 0;right: 0;margin: auto auto;}
+.index_nav li{width:25%;overflow:hidden;float: left;cursor: pointer;position: relative;}
+.index_nav .index-list{width: 90%;margin:0px auto;height: 150px;}
+.index_nav .icon{width: 100%;height: 70px;background-repeat: no-repeat;background-position: center center;background-size: 100% 100%;}
+.index_nav .songicon{background-image: url(../img/songicon.png);}
+.index_nav .classifyicon{background-image: url(../img/classifyicon.png);}
+.index_nav .albumicon{background-image: url(../img/albumicon.png);}
+.index_nav .usericon{background-image: url(../img/usericon.png);}
+.index_nav .tabtext{width: 100%;margin:0px auto;overflow: hidden;background: #fff;}
+.index_nav .tabtext p:nth-child(1){width: 100%;overflow:hidden;font: 18px/28px 黑体;color: #333;text-align: center;}
+.index_nav .tabtext p:nth-child(2){width: 100%;height:20px;overflow:hidden;font: 16px 黑体;color: #666;text-align: center;}
+
 /*内容区*/
 .KJY_title,.mask_title{width:100%;margin:0px auto;background:#fafafa;height: 40px;font:bold 16px/40px 黑体;color: #333;text-indent: 20px;position: relative;}
 /*搜索部分*/

@@ -109,16 +109,12 @@ function loadnodata() {
 }
 //列表加载移除
 function removeloadding(data, flag) {
-	if(flag == 0) {
-		if(data == 0) {
-			loadnodata();
-		} else {
-			$(".nodata").remove();
-		}
-		$(".KJYBOX").show();
-	} else if(flag == 1) {
-		$(".tabtext").show();
+	if(data == 0) {
+		loadnodata();
+	} else {
+		$(".nodata").remove();
 	}
+	$(".KJYBOX").show();
 	$(".loadding").remove();
 }
 //弹出框展示

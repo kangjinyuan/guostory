@@ -15,49 +15,47 @@
 	</head>
 
 	<body>
-		<div class="KJYBOX" style="display: block;">
+		<div class="KJYBOX">
 			<div class="index">
-				<ul class="index_nav">
-					<li data-page="page/songMag" onclick="golinkToifram(this)">
-						<div class="index_navlist">
-							<div class="songicon f_l"></div>
-							<div class="tabtext">
-								<p>{{melodyCount}}</p>
-								<p>曲目</p>
+				<div class="indexbg">
+					<ul class="index_nav">
+						<li>
+							<div class="index-list">
+								<div class="icon songicon"></div>
+								<div class="tabtext">
+									<p>曲目</p>
+									<p>({{melodyCount}})</p>
+								</div>
 							</div>
-						</div>
-					</li>
-					<li data-page="page/classifyMag" onclick="golinkToifram(this)">
-						<div class="index_navlist">
-							<div class="classifyicon f_l"></div>
-							<div class="tabtext">
-								<p>{{classificationCount}}</p>
-								<p>分类</p>
+						</li>
+						<li>
+							<div class="index-list">
+								<div class="icon classifyicon"></div>
+								<div class="tabtext">
+									<p>分类</p>
+									<p>({{classificationCount}})</p>
+								</div>
 							</div>
-						</div>
-					</li>
-					<li data-page="page/albumMag" onclick="golinkToifram(this)">
-						<div class="index_navlist">
-							<div class="albumicon f_l"></div>
-							<div class="tabtext">
-								<p>{{albumCount}}</p>
-								<p>专辑</p>
+						</li>
+						<li>
+							<div class="index-list">
+								<div class="icon albumicon"></div>
+								<div class="tabtext">
+									<p>专辑</p>
+									<p>({{albumCount}})</p>
+								</div>
 							</div>
-						</div>
-					</li>
-					<li data-page="page/useTransaction" onclick="golinkToifram(this)">
-						<div class="index_navlist">
-							<div class="usericon f_l"></div>
-							<div class="tabtext">
-								<p>{{accountCount}}</p>
-								<p>用户</p>
+						</li>
+						<li>
+							<div class="index-list">
+								<div class="icon usericon"></div>
+								<div class="tabtext">
+									<p>用户</p>
+									<p>({{accountCount}})</p>
+								</div>
 							</div>
-						</div>
-					</li>
-				</ul>
-				<div class="usercount">
-					<div class="usercount_title">用户统计</div>
-					<div class="usercount_echart" id="usercount_echart"></div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -75,9 +73,8 @@
 		}
 		loadvue(paras);
 
-		function usercount_echart() {
+		function loaddata() {
 			loadmaskpart("part/loadding", function() {
-				var myChart = echarts.init(document.getElementById('usercount_echart'));
 				$.ajax({
 					type: "POST",
 					url: url + "mainpage/query.do",
@@ -85,62 +82,17 @@
 					dataType: 'json',
 					success: function(data) {
 						if(data.state == true) {
-							myChart.setOption({
-								color: ['#1a648e'],
-								title: {},
-								tooltip: {},
-								legend: {
-									data: ['用户总数', '新增用户'],
-									left: "center",
-									top: "30px"
-								},
-								xAxis: {
-									data: ["第一天", "第二天", "第三天", "第四天", "第五天", "第六天", "第七天"]
-								},
-								yAxis: {
-									type: 'value'
-								},
-								series: [{
-									color: ["#68a6f3"],
-									name: '用户总数',
-									type: 'line',
-									symbolSize: 15,
-									borderWidth: 5,
-									lineStyle: {
-										normal: {
-											width: 5,
-											color: '#68a6f3',
-											type: 'solid'
-										},
-									},
-									data: data.data.totalUsers
-								}, {
-									color: ["#84be50"],
-									name: '新增用户',
-									type: 'line',
-									symbolSize: 15,
-									lineStyle: {
-										normal: {
-											width: 5,
-											color: '#84be50',
-											type: 'solid'
-										},
-									},
-									data: data.data.increasedUsers
-								}]
-							});
 							setData.melodyCount = data.data.melodyCount;
 							setData.classificationCount = data.data.classificationCount;
 							setData.albumCount = data.data.albumCount;
 							setData.accountCount = data.data.accountCount;
-							removeloadding(setData, 1);
+							removeloadding();
 						}
 					}
 				});
 			});
 		}
-		usercount_echart();
-		//	定义跳转链接
+		loaddata();
 	</script>
 
 </html>

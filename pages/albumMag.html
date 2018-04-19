@@ -34,6 +34,16 @@
 							</select>
 						</div>
 					</div>
+					<div class="search">
+						<div class="searchname">精品分类：</div>
+						<div class="searchvalue">
+							<select name="" id="melodyPrecious" v-on:change="loaddata">
+								<option value="">请选择分类</option>
+								<option value="true">精品</option>
+								<option value="false">非精品</option>
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="btnbox">
@@ -169,7 +179,8 @@
 				var paras = {
 					page: page,
 					blur: $("#blur").val(),
-					albumTag: $("#albumTag").val()
+					albumTag: $("#albumTag").val(),
+					isPrecious: $("#melodyPrecious").val()
 				};
 				paras = JSON.stringify(paras);
 				$.ajax({
@@ -192,7 +203,7 @@
 						setData.pageSize = data.pageSize;
 						setData.datalen = data.data.length;
 						loadselect();
-						removeloadding(data.data.length, 0);
+						removeloadding(data.data.length);
 					}
 				});
 			})

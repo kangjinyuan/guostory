@@ -27,7 +27,7 @@
 					<div class="search">
 						<div class="searchname">分类：</div>
 						<div class="searchvalue">
-							<select name="" id="melodyCategoty" v-on:change="loaddata">
+							<select name="" id="melodyCategory" v-on:change="loaddata">
 								<option value="">请选择分类</option>
 								<option v-for="category in categoryList" v-bind:value="category">{{category}}</option>
 							</select>
@@ -39,6 +39,16 @@
 							<select name="" id="melodyAlbum" v-on:change="loaddata">
 								<option value="">请选择专辑</option>
 								<option v-for="album in albumList" v-bind:value="album">{{album}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="search">
+						<div class="searchname">精品分类：</div>
+						<div class="searchvalue">
+							<select name="" id="melodyPrecious" v-on:change="loaddata">
+								<option value="">请选择分类</option>
+								<option value="true">精品</option>
+								<option value="false">非精品</option>
 							</select>
 						</div>
 					</div>
@@ -164,7 +174,7 @@
 								layerdom.find("#QRCodesave").show();
 								layerdom.find("#QRCode").qrcode({
 									render: "canvas",
-									text: url+"share/player.html?melodyId=" + data.data.id+"&melodyAlbum="+data.data.melodyAlbum,
+									text: url + "share/player.html?melodyId=" + data.data.id + "&melodyAlbum=" + data.data.melodyAlbum,
 									width: "100", //二维码的宽度
 									height: "100", //二维码的高度
 									background: "#ffffff", //二维码的后景色
@@ -210,13 +220,14 @@
 
 		function loaddata() {
 			loadmaskpart("../part/loadding", function() {
-				var melodyCategoty = $("#melodyCategoty").val();
+				var melodyCategory = $("#melodyCategory").val();
 				var melodyAlbum = $("#melodyAlbum").val();
 				var paras = {
 					page: page,
 					blur: $("#blur").val(),
-					melodyCategoty: melodyCategoty,
-					melodyAlbum: melodyAlbum
+					melodyCategory: melodyCategory,
+					melodyAlbum: melodyAlbum,
+					isPrecious: $("#melodyPrecious").val()
 				};
 				paras = JSON.stringify(paras);
 
@@ -241,7 +252,7 @@
 						setData.count = data.count;
 						setData.pageSize = data.pageSize;
 						setData.datalen = data.data.melodyList.length;
-						removeloadding(data.data.melodyList.length, 0);
+						removeloadding(data.data.melodyList.length);
 					}
 				});
 			});
