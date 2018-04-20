@@ -1,13 +1,13 @@
 layui.use('element', function() {
 	var $ = layui.jquery,
-	element = layui.element;
+		element = layui.element;
 	$("#rightNav li").eq(0).children("i").css("display", "none");
 	var navs = new Array();
 	$(".layui-nav dd").on("click", "a", function() {
 		if($.inArray($(this).attr("id"), navs) > -1) {
 			//切换到指定Tab项
 			element.tabDelete("KJY", $(this).attr("id"));
-			navs.splice($.inArray($(this).attr("id"), navs),1);
+			navs.splice($.inArray($(this).attr("id"), navs), 1);
 			navs.push($(this).attr("id"));
 			//新增一个Tab项
 			element.tabAdd('KJY', {

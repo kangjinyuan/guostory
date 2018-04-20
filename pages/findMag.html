@@ -134,6 +134,7 @@
 					id: id
 				};
 				paras = JSON.stringify(paras);
+				var timestamp = new Date().getTime();
 				$.ajax({
 					type: 'POST',
 					url: url + 'article/query.do',
@@ -144,9 +145,8 @@
 						if(data.state == true) {
 							layerdom.find("#findtitle").val(data.data.articleTitle);
 							layerdom.find("#findAuthor").val(data.data.author);
-							layerdom.find("#Image").val(url + data.data.coverImageUrl);
-							layerdom.find("#showImage").attr("src", url + data.data.coverImageUrl);
-							layerdom.find("#Imagetext").val(data.data.coverImageUrl);
+							layerdom.find("#showImage").attr("src", url + data.data.coverImageUrl+"?timestamp="+timestamp);
+							layerdom.find("#showImage").attr("alt", data.data.coverImageUrl);
 							layerdom.find("#findzhaiyao").val(data.data.summary);
 							layerdom.find("#findOrder").val(data.data.articleSort);
 							layerdom.find(".layui-layedit iframe").contents().find("body").html(data.data.content);
@@ -198,13 +198,14 @@
 					dataType: 'json',
 					success: function(data) {
 						var datalist = data.data;
+						var timestamp = new Date().getTime();
 						for(var i = 0; i < datalist.length; i++) {
 							if(datalist[i].isPublished == "0") {
 								datalist[i].publishedtext = "发布";
 							} else {
 								datalist[i].publishedtext = "下线";
 							}
-							var headimg = url + datalist[i].coverImageUrl;
+							var headimg = url + datalist[i].coverImageUrl + "?timestamp=" + timestamp;
 							datalist[i].headimg = headimg
 						}
 						if(datalist.length == 0) {

@@ -103,8 +103,9 @@
 					dataType: 'json',
 					success: function(data) {
 						var datalist = data.data;
+						var timestamp = new Date().getTime();
 						for(var i = 0; i < datalist.length; i++) {
-							var icon = url + datalist[i].icon;
+							var icon = url + datalist[i].icon + "?timestamp=" + timestamp;
 							datalist[i].icon = icon;
 						}
 						setData.datalist = datalist;

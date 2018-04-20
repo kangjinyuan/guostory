@@ -25,7 +25,7 @@
 					<li v-for="t in datalist">
 						<div class="bannerlist">
 							<div class="bannerimg">
-								<img src="t.bannerimg" alt="t.bannerimg" onerror="this.src='../img/bannerbgimg.png'" />
+								<img v-bind:src="t.bannerimg" v-bind:alt="t.bannerimg" onerror="this.src='../img/bannerbgimg.png'" />
 							</div>
 							<div class="bannercon">
 								<div><span class="title">标题：</span>{{t.contentTitle}}</div>
@@ -57,18 +57,19 @@
 		loadvue(paras);
 		//		新建弹出
 		function showmask(t, title) {
-			openmask("", "../part/bannerMagAE", title, "560px", "400px", function(layerdom) {
+			openmask("", "../part/bannerMagAE", title, "560px", "450px", function(layerdom) {
 				layerdom.find("#creatsave").attr("onclick", "save()");
 			})
 		}
 
 		//		查看数据
 		function seedata(id) {
-			openmask(id, "../part/bannerMagAE", "编辑banner", "560px", "400px", function(layerdom) {
+			openmask(id, "../part/bannerMagAE", "编辑banner", "560px", "450px", function(layerdom) {
 				var paras = {
 					id: id
 				};
 				paras = JSON.stringify(paras);
+				var timestamp = new Date().getTime();
 				$.ajax({
 					type: 'POST',
 					url: url + 'banner/query.do',
@@ -79,10 +80,10 @@
 						if(data.state == true) {
 							layerdom.find("#bannertab").val(data.data.contentType);
 							layerdom.find("#bannercon").val(data.data.contentTitle);
+							layerdom.find("#orderIndex").val(data.data.orderIndex);
 							layerdom.find("#bannerconid").val(data.data.contentId);
-							layerdom.find("#Image").val(url + data.data.bannerImage);
-							layerdom.find("#showImage").attr("src", url + data.data.bannerImage);
-							layerdom.find("#Imagetext").val(data.data.bannerImage);
+							layerdom.find("#showImage").attr("src", url + data.data.bannerImage+"?timestamp="+timestamp);
+							layerdom.find("#showImage").attr("alt", data.data.bannerImage);
 							layerdom.find("#creatsave").attr("onclick", "updata()");
 						}
 					}
@@ -128,8 +129,9 @@
 					dataType: 'json',
 					success: function(data) {
 						var datalist = data.data;
+						var timestamp = new Date().getTime();
 						for(var i = 0; i < datalist.length; i++) {
-							var bannerimg = url + datalist[i].coverImageUrl;
+							var bannerimg = url + datalist[i].bannerImage + "?timestamp=" + timestamp;
 							datalist[i].bannerimg = bannerimg;
 						}
 						setData.datalist = data.data;

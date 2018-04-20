@@ -147,6 +147,7 @@
 						id: id
 					};
 					paras = JSON.stringify(paras);
+					var timestamp = new Date().getTime();
 					$.ajax({
 						type: 'POST',
 						url: url + 'melody/query.do',
@@ -164,11 +165,9 @@
 								layerdom.find("#Tags").val(data.data.melodyTags);
 								layerdom.find("#ages").val(data.data.melodyAgeStart + "-" + data.data.melodyAgeEnd);
 								layerdom.find("#Price").val(data.data.melodyPrice);
-								layerdom.find("#Image").val(url + data.data.melodyCoverImage);
-								layerdom.find("#showImage").attr("src", url + data.data.melodyCoverImage);
-								layerdom.find("#song").val(url + data.data.melodyFilePath);
+								layerdom.find("#showImage").attr("src", url + data.data.melodyCoverImage+"?timestamp="+timestamp);
+								layerdom.find("#showImage").attr("alt", data.data.melodyCoverImage);
 								layerdom.find("#showsong").attr("src", url + data.data.melodyFilePath);
-								layerdom.find("#Imagetext").val(data.data.melodyCoverImage);
 								layerdom.find("#songtext").val(data.data.melodyFilePath);
 								layerdom.find("#creatsave").attr("onclick", "updata();");
 								layerdom.find("#QRCodesave").show();

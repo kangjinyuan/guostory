@@ -44,8 +44,7 @@
 					<div class="masklistname"><span>*</span><span class="text">文章封面</span></div>
 					<div class="masklistvalue">
 						<img src="" alt="" id="showImage" onerror="this.src='../img/noimg.png'" />
-						<input type="hidden" name="" value="" id="Image" class="required" />
-						<div class="btn margintop8" onclick="uploadimg();" id="creatImage">本地上传</div>
+						<div class="btn margintop8" onclick="uploadimg(this);">本地上传</div>
 					</div>
 					<form method="post" action="" enctype="multipart/form-data" id="coverImage" style="display: none;">
 						<input type="text" name="fileName" id="Imagetext" value="" />
@@ -73,6 +72,8 @@
 	</body>
 	<script src="../js/jquery-1.9.1.min.js"></script>
 	<script src="../js/photoload.js"></script>
+	<script src="../js/photoloadinit.js"></script>
+	<script src="../js/uploadimg.js"></script>
 	<script src="../layui/layui.all.js"></script>
 	<script src="../js/vue.min.js"></script>
 	<script src="../js/comment.js"></script>
@@ -85,7 +86,7 @@
 				var paras = {
 					articleTitle: $("#findtitle").val(),
 					author: $("#findAuthor").val(),
-					coverImageUrl: $("#Imagetext").val(),
+					coverImageUrl: $("#showImage").attr("alt"),
 					summary: $("#findzhaiyao").val(),
 					articleSort: parseInt($("#findOrder").val()),
 					content: $(".layui-layedit iframe").contents().find("body").html()
@@ -119,7 +120,7 @@
 					id: $(".main_mask").attr("data-id"),
 					articleTitle: $("#findtitle").val(),
 					author: $("#findAuthor").val(),
-					coverImageUrl: $("#Imagetext").val(),
+					coverImageUrl: $("#showImage").attr("alt"),
 					summary: $("#findzhaiyao").val(),
 					articleSort: parseInt($("#findOrder").val()),
 					content: $(".layui-layedit iframe").contents().find("body").html()

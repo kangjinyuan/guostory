@@ -59,9 +59,8 @@
 				<div class="masklist">
 					<div class="masklistname"><span>*</span><span class="text">专辑封面</span>：</div>
 					<div class="masklistvalue">
-						<img src="" alt="" id="showImage" onerror="this.src='../img/noimg.png'" />
-						<input type="hidden" name="" value="" id="Image" class="required" />
-						<div class="btn margintop8" onclick="uploadimg();" id="creatImage">本地上传</div>
+						<img src="" alt="" id="showImage" onerror="this.src='../img/noimg.png'" class="requiredimg" />
+						<div class="btn margintop8" onclick="uploadimg(this);">本地上传</div>
 					</div>
 				</div>
 				<form method="post" action="" enctype="multipart/form-data" id="coverImage" style="display: none;">
@@ -77,6 +76,7 @@
 	<script src="../js/jquery-1.9.1.min.js"></script>
 	<script src="../js/photoload.js"></script>
 	<script src="../js/photoloadinit.js"></script>
+	<script src="../js/uploadimg.js"></script>
 	<script src="../layui/layui.all.js"></script>
 	<script src="../js/vue.min.js"></script>
 	<script src="../js/jquery.form.js"></script>
@@ -89,7 +89,7 @@
 				var paras = {
 					albumName: $("#albumName").val(),
 					albumSort: $("#albumOrder").val(),
-					albumCoverImage: $("#Imagetext").val(),
+					albumCoverImage: $("#showImage").attr("alt"),
 					albumPrecious: parseInt($("#isPre").val()),
 					albumAbstract: $("#albumAbstract").val(),
 					albumTag: $("#albumTag").val()
@@ -122,7 +122,7 @@
 					id: $(".main_mask").attr("data-id"),
 					albumName: $("#albumName").val(),
 					albumSort: $("#albumOrder").val(),
-					albumCoverImage: $("#Imagetext").val(),
+					albumCoverImage: $("#showImage").attr("alt"),
 					albumPrecious: parseInt($("#isPre").val()),
 					albumAbstract: $("#albumAbstract").val(),
 					albumTag: $("#albumTag").val()

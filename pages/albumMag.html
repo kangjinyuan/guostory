@@ -121,6 +121,7 @@
 						id: id
 					};
 					paras = JSON.stringify(paras);
+					var timestamp = new Date().getTime();
 					$.ajax({
 						type: 'POST',
 						url: url + 'album/query.do',
@@ -134,9 +135,8 @@
 								layerdom.find("#isPre").val(data.data.albumPrecious);
 								layerdom.find("#albumTag").val(data.data.albumTag);
 								layerdom.find("#albumAbstract").val(data.data.albumAbstract);
-								layerdom.find("#Image").val(url + data.data.albumCoverImage);
-								layerdom.find("#showImage").attr("src", url + data.data.albumCoverImage);
-								layerdom.find("#Imagetext").val(data.data.albumCoverImage);
+								layerdom.find("#showImage").attr("src", url + data.data.albumCoverImage+"?timestamp="+timestamp);
+								layerdom.find("#showImage").attr("alt", data.data.albumCoverImage);
 								layerdom.find("#creatsave").attr("onclick", "updata()");
 							}
 						}

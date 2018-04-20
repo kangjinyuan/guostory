@@ -93,17 +93,15 @@
 				<div class="masklist">
 					<div class="masklistname"><span>*</span><span class="text">曲目封面</span>：</div>
 					<div class="masklistvalue">
-						<img src="" alt="" id="showImage" onerror="this.src='../img/noimg.png'" />
-						<input type="hidden" name="" value="" id="Image" class="required" />
+						<img src="" alt="" id="showImage" onerror="this.src='../img/noimg.png'" class="requiredimg" />
 						<div class="masklist_prompt">仅支持jpg、png、或gif格式</div>
-						<div class="btn" onclick="uploadimg();" id="creatImage">本地上传</div>
+						<div class="btn upLoadImg" onclick="uploadimg(this);">本地上传</div>
 					</div>
 				</div>
 				<div class="masklist">
 					<div class="masklistname"><span>*</span><span class="text">上传曲目</span>：</div>
 					<div class="masklistvalue">
-						<audio controls="controls" src="" id="showsong"></audio>
-						<input type="hidden" name="" value="" id="song" class="required" />
+						<audio controls="controls" src="" id="showsong" class="requiredimg"></audio>
 						<div class="btn margintop8" onclick="uploadsong();" id="creatsong">本地上传</div>
 					</div>
 				</div>
@@ -134,6 +132,7 @@
 	<script src="../js/jquery-1.9.1.min.js"></script>
 	<script src="../js/photoload.js"></script>
 	<script src="../js/photoloadinit.js"></script>
+	<script src="../js/uploadimg.js"></script>
 	<script src="../layui/layui.all.js"></script>
 	<script src="../js/vue.min.js"></script>
 	<script src="../js/jquery.qrcode.js"></script>
@@ -162,7 +161,7 @@
 					melodyAgeStart: $("#ages").val().split("-")[0],
 					melodyAgeEnd: $("#ages").val().split("-")[1],
 					melodyPrice: $("#Price").val(),
-					melodyCoverImage: $("#Imagetext").val(),
+					melodyCoverImage: $("#showImage").attr("alt"),
 					melodyFilePath: $("#songtext").val(),
 					melodyPrecious: parseInt($("#isPre").val())
 				};
@@ -201,7 +200,7 @@
 					melodyAgeStart: $("#ages").val().split("-")[0],
 					melodyAgeEnd: $("#ages").val().split("-")[1],
 					melodyPrice: $("#Price").val(),
-					melodyCoverImage: $("#Imagetext").val(),
+					melodyCoverImage: $("#showImage").attr("alt"),
 					melodyFilePath: $("#songtext").val(),
 					melodyPrecious: parseInt($("#isPre").val())
 				};

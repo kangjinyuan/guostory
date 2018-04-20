@@ -225,48 +225,22 @@ function maskbeforepage() {
 	}
 	loaddata(tabindex);
 }
-//		上传图片
-function uploadimg() {
-	$("#coverImage").attr("action", url + "common/imageUpload.do");
-	$('#ImageFile').trigger('click');
-}
 //		上传歌曲
 function uploadsong() {
 	$("#coversong").attr("action", url + "common/melodyUpload.do");
 	$('#songFile').trigger('click');
 }
 
-function subimtimgBtn() {
-	loadmaskpart("../part/loadding", function() {
-		var form = $("#coverImage");
-		var options = {
-			url: $(form).attr("action"),
-			type: 'post',
-			success: function(data) {
-				if(data.code == 0) {
-					$("#showImage").attr("src", url + data.data.src);
-					$("#Image").val($("#ImageFile").val());
-					$("#Imagetext").val(data.data.src);
-					removeloadding();
-				} else {
-					layer.msg(data.msg);
-					removeloadding();
-				}
-			}
-		};
-		form.ajaxSubmit(options);
-	})
-};
-
 function subimtsongBtn() {
 	loadmaskpart("../part/loadding", function() {
 		var form = $("#coversong");
+		var timestamp = new Date().getTime();
 		var options = {
 			url: $(form).attr("action"),
 			type: 'post',
 			success: function(data) {
 				if(data.state == true) {
-					$("#showsong").attr("src", url + data.msg);
+					$("#showsong").attr("src", url + data.msg + "?timestamp=" + timestamp);
 					$("#song").val($("#songFile").val());
 					$("#songtext").val(data.msg);
 					removeloadding();
@@ -285,6 +259,13 @@ function checkInput() {
 	for(var i = 0; i < $(".required").length; i++) {
 		if($(".required").eq(i).val() == "") {
 			var required = $(".required").eq(i).parent().siblings(".masklistname").find(".text").text();
+			layer.msg(required + " 为必填项 请核对");
+			return false;
+		}
+	}
+	for(var i = 0; i < $(".requiredimg").length; i++) {
+		if($(".requiredimg").eq(i).attr("src") == "") {
+			var required = $(".requiredimg").eq(i).parent().siblings(".masklistname").find(".text").text();
 			layer.msg(required + " 为必填项 请核对");
 			return false;
 		}
