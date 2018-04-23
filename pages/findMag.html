@@ -76,17 +76,16 @@
 			pageSize: "",
 		}
 		loadvue(paras);
-		var fabu = null;
 
 		function findrelease(event, id) {
 			var ev = event.currentTarget;
-			var paras = {
-				id: id,
-				isPublished: fabu
-			};
-			paras = JSON.stringify(paras);
 			if($(ev).text() == "发布") {
-				fabu = 1;
+				var fabu = 1;
+				var paras = {
+					id: id,
+					isPublished: fabu
+				};
+				paras = JSON.stringify(paras);
 				$.ajax({
 					type: 'POST',
 					url: url + 'article/update.do',
@@ -103,7 +102,12 @@
 					}
 				});
 			} else if($(ev).text() == "下线") {
-				fabu = 0;
+				var fabu = 0;
+				var paras = {
+					id: id,
+					isPublished: fabu
+				};
+				paras = JSON.stringify(paras);
 				$.ajax({
 					type: 'POST',
 					url: url + 'article/update.do',
@@ -145,7 +149,7 @@
 						if(data.state == true) {
 							layerdom.find("#findtitle").val(data.data.articleTitle);
 							layerdom.find("#findAuthor").val(data.data.author);
-							layerdom.find("#showImage").attr("src", url + data.data.coverImageUrl+"?timestamp="+timestamp);
+							layerdom.find("#showImage").attr("src", url + data.data.coverImageUrl + "?timestamp=" + timestamp);
 							layerdom.find("#showImage").attr("alt", data.data.coverImageUrl);
 							layerdom.find("#findzhaiyao").val(data.data.summary);
 							layerdom.find("#findOrder").val(data.data.articleSort);
