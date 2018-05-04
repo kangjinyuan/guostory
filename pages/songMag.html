@@ -29,7 +29,7 @@
 						<div class="searchvalue">
 							<select name="" id="melodyCategory" v-on:change="loaddata">
 								<option value="">请选择分类</option>
-								<option v-for="category in categoryList" v-bind:value="category">{{category}}</option>
+								<option v-for="category in categoryList" v-bind:value="category">{{category.categoryName}}</option>
 							</select>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 						<div class="searchvalue">
 							<select name="" id="melodyAlbum" v-on:change="loaddata">
 								<option value="">请选择专辑</option>
-								<option v-for="album in albumList" v-bind:value="album">{{album}}</option>
+								<option v-for="album in albumList" v-bind:value="album">{{album.albumName}}</option>
 							</select>
 						</div>
 					</div>
@@ -138,6 +138,7 @@
 				})
 			})
 		}
+
 		//		查看数据
 		function seedata(id) {
 			openmask(id, "../part/songMagAE", "编辑曲目", "60%", "100%", function(layerdom, layerifame) {
@@ -159,13 +160,24 @@
 								layerdom.find("#Name").val(data.data.melodyName);
 								layerdom.find("#isPre").val(data.data.melodyPrecious);
 								layerdom.find("#Author").val(data.data.melodyAuthor);
-								layerdom.find("#Category").val(data.data.melodyCategory);
+								binddata('category/queryList.do', data.data.melodyCategory, function(res) {
+									var category = res.data;
+									for(var i = 0; i < category.length; i++) {
+										layerdom.find("#Category").val(category[i].id);
+									}
+								})
+								binddata('album/queryList.do', data.data.melodyAlbum, function(res) {
+									var Album = res.data;
+									for(var i = 0; i < Album.length; i++) {
+										layerdom.find("#Album").val(Album[i].id);
+									}
+								})
 								layerdom.find("#Artist").val(data.data.melodyArtist);
-								layerdom.find("#Album").val(data.data.melodyAlbum);
 								layerdom.find("#Tags").val(data.data.melodyTags);
+								layerdom.find("#melodySort").val(data.data.melodySort);
 								layerdom.find("#ages").val(data.data.melodyAgeStart + "-" + data.data.melodyAgeEnd);
 								layerdom.find("#Price").val(data.data.melodyPrice);
-								layerdom.find("#showImage").attr("src", url + data.data.melodyCoverImage+"?timestamp="+timestamp);
+								layerdom.find("#showImage").attr("src", url + data.data.melodyCoverImage + "?timestamp=" + timestamp);
 								layerdom.find("#showImage").attr("alt", data.data.melodyCoverImage);
 								layerdom.find("#showsong").attr("src", url + data.data.melodyFilePath);
 								layerdom.find("#songtext").val(data.data.melodyFilePath);
@@ -243,9 +255,7 @@
 						for(var i = 0; i < datalist.length; i++) {
 							datalist[i].isActive = false;
 						}
-						if(datalist.length == 0) {
-							setData.allisActive == false;
-						}
+						setData.allisActive = false;
 						setData.datalist = datalist;
 						setData.currentPage = data.currentPage;
 						setData.count = data.count;

@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>故事树后台管理</title>
+		<title>果果故事树后台管理系统</title>
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<meta http-equiv="Pragma" content="no-cache">
@@ -159,9 +159,7 @@
 						for(var i = 0; i < datalist.length; i++) {
 							datalist[i].isActive = false;
 						}
-						if(datalist.length == 0) {
-							setData.allisActive == false;
-						}
+						setData.allisActive = false;
 						setData.datalist = datalist;
 						setData.currentPage = data.currentPage;
 						setData.count = data.count;

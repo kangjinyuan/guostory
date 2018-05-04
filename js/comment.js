@@ -254,6 +254,26 @@ function subimtsongBtn() {
 	})
 };
 
+//ajax内部查看专辑和分类
+function binddata(bindurl, blur, callback) {
+	var paras = {
+		blur: blur,
+	}
+	paras = JSON.stringify(paras);
+	$.ajax({
+		type: 'POST',
+		url: url + bindurl,
+		contentType: "application/json;charset=UTF-8",
+		data: paras,
+		dataType: 'json',
+		success: function(data) {
+			if(data.state == true) {
+				callback(data);
+			}
+		}
+	});
+}
+
 function checkInput() {
 	//	必填
 	for(var i = 0; i < $(".required").length; i++) {
@@ -290,7 +310,7 @@ function checkInput() {
 	for(var i = 0; i < $(".findtextlength").length; i++) {
 		if($(".findtextlength").eq(i).val().length > 200) {
 			var findtextlength = $(".findtextlength").eq(i).parent().siblings(".masklistname").find(".text").text();
-			layer.msg(findtextlength + "长度不能超过15");
+			layer.msg(findtextlength + "长度不能超过200");
 			return false;
 		}
 	}

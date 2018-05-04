@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>故事树后台管理</title>
+		<title>果果故事树后台管理系统</title>
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<meta http-equiv="Pragma" content="no-cache">
@@ -90,6 +90,7 @@
 					albumName: $("#albumName").val(),
 					albumSort: $("#albumOrder").val(),
 					albumCoverImage: $("#showImage").attr("alt"),
+					albumCoverImageId: '0',
 					albumPrecious: parseInt($("#isPre").val()),
 					albumAbstract: $("#albumAbstract").val(),
 					albumTag: $("#albumTag").val()
@@ -123,6 +124,7 @@
 					albumName: $("#albumName").val(),
 					albumSort: $("#albumOrder").val(),
 					albumCoverImage: $("#showImage").attr("alt"),
+					albumCoverImageId: '0',
 					albumPrecious: parseInt($("#isPre").val()),
 					albumAbstract: $("#albumAbstract").val(),
 					albumTag: $("#albumTag").val()
@@ -162,7 +164,7 @@
 				success: function(data) {
 					var songclassify = "";
 					for(var i = 0; i < data.data.categoryList.length; i++) {
-						songclassify += "<option value='" + data.data.categoryList[i] + "'>" + data.data.categoryList[i] + "</option>";
+						songclassify += "<option value='" + data.data.categoryList[i].categoryName + "'>" + data.data.categoryList[i].categoryName + "</option>";
 					}
 					$("#albumTag").append(songclassify);
 					okcallback();
