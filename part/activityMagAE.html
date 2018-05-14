@@ -18,17 +18,84 @@
 		<div class="main_mask">
 			<div class="con">
 				<div class="masklist">
-					<div class="masklistname"><span>*</span><span class="text">分类名称</span>：</div>
+					<div class="masklistname"><span>*</span><span class="text">活动名称</span>：</div>
 					<div class="masklistvalue">
-						<input type="text" name="" value="" id="classifyName" class="required textlength" />
+						<input type="text" name="" value="" id="avtivityTitle" class="required textlength" />
 						<div class="masklist_prompt">不超过15个字</div>
 					</div>
 				</div>
 				<div class="masklist">
-					<div class="masklistname"><span>*</span><span class="text">分类排序</span>：</div>
+					<div class="masklistname"><span>*</span><span class="text">活动内容</span>：</div>
 					<div class="masklistvalue">
-						<input type="text" name="" value="" id="classifyOrder" class="required" />
-						<div class="masklist_prompt">越大越靠前</div>
+						<select name="" id="avtivitycon" class="required smallip">
+							<option value="">请选择内容</option>
+							<option value="">vip一个月</option>
+							<option value="">vip三个月</option>
+							<option value="">vip一年</option>
+						</select>
+					</div>
+				</div>
+				<div class="masklist">
+					<div class="masklistname"><span>*</span><span class="text">生成量</span>：</div>
+					<div class="masklistvalue">
+						<input type="text" name="" value="" id="activityNum" class="required smallip" />
+					</div>
+				</div>
+				<div class="maskbtnbox">
+					<div class="btn">创建活动</div>
+				</div>
+				<div class="masklist">
+					<div class="KJY_table KJY-table5">
+						<table>
+							<thead>
+								<th>活动内容</th>
+								<th>生成量</th>
+								<th>创建时间</th>
+								<th>操作</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td>vip一个月</td>
+									<td>100</td>
+									<td>2018-5-6</td>
+									<td>
+										<div class="btn">删除</div>
+									</td>
+								</tr>
+								<tr>
+									<td>vip一个月</td>
+									<td>100</td>
+									<td>2018-5-6</td>
+									<td>
+										<div class="btn">删除</div>
+									</td>
+								</tr>
+								<tr>
+									<td>vip一个月</td>
+									<td>100</td>
+									<td>2018-5-6</td>
+									<td>
+										<div class="btn">删除</div>
+									</td>
+								</tr>
+								<tr>
+									<td>vip一个月</td>
+									<td>100</td>
+									<td>2018-5-6</td>
+									<td>
+										<div class="btn">删除</div>
+									</td>
+								</tr>
+								<tr>
+									<td>vip一个月</td>
+									<td>100</td>
+									<td>2018-5-6</td>
+									<td>
+										<div class="btn">删除</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 				<div class="maskbtnbox">
@@ -42,7 +109,7 @@
 	<script src="../js/vue.min.js"></script>
 	<script src="../js/comment.js"></script>
 	<script>
-		//		新建classify
+		//		新建activity
 		function save() {
 			var checkI = checkInput();
 			if(checkI == true) {

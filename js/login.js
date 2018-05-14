@@ -14,6 +14,7 @@ function createCode() {
 	checkCode.innerHTML = code;
 	$("#validate").val("");
 }
+
 //键盘enter键敲击登录
 window.onkeydown = function(ev) {
 	var ev = ev || window.event;
@@ -21,6 +22,7 @@ window.onkeydown = function(ev) {
 		validate();
 	};
 }
+
 //登录方法
 function login() {
 	loadmaskpart("part/loadding", function() {
@@ -47,6 +49,7 @@ function login() {
 }
 
 var code; //在全局 定义验证码
+
 function validate() {
 	var inputCode = document.getElementById("validate").value.toUpperCase();
 
@@ -66,6 +69,7 @@ function validate() {
 		return true;
 	}
 }
+
 $(function() {
 	//确定按钮点击登录
 	$("#login_btn").click(function() {

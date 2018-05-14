@@ -1,6 +1,6 @@
 var url = "https://admin.guostory.com/";
 //var url = "https://xcx.guostory.com/";
-//var url = "http://10.96.155.105:8080/storytree/";
+//var url = "http://10.96.155.100:8080/storytree/";
 var setData;
 var index = parent.layer.getFrameIndex(window.name);
 //初始化vue
@@ -24,6 +24,7 @@ function loadvue(paras) {
 		}
 	})
 }
+
 //批量删除
 var delidList = [];
 
@@ -63,6 +64,7 @@ function selectdata(event, i, id) {
 
 	}
 }
+
 //弹框单选
 var rcheck = "";
 var rchecktxt = "";
@@ -107,6 +109,7 @@ function loadnodata() {
 		}
 	});
 }
+
 //列表加载移除
 function removeloadding(data, flag) {
 	if(data == 0) {
@@ -117,6 +120,7 @@ function removeloadding(data, flag) {
 	$(".KJYBOX").show();
 	$(".loadding").remove();
 }
+
 //弹出框展示
 function openmask(id, maskboxurl, title, Wh, Hh, okcallback) {
 	layer.open({
@@ -137,6 +141,7 @@ function openmask(id, maskboxurl, title, Wh, Hh, okcallback) {
 		},
 	});
 }
+
 //置空新建
 function resetmask() {
 	$(".main_mask input").val("");
@@ -155,6 +160,7 @@ function quit() {
 		})
 	})
 }
+
 //获取地址栏参数
 function getQueryString(key) {
 	var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
@@ -193,6 +199,7 @@ function beforepage() {
 	}
 	loaddata();
 }
+
 //弹框
 var tabindex = "";
 
@@ -225,6 +232,7 @@ function maskbeforepage() {
 	}
 	loaddata(tabindex);
 }
+
 //		上传歌曲
 function uploadsong() {
 	$("#coversong").attr("action", url + "common/melodyUpload.do");
@@ -284,7 +292,7 @@ function checkInput() {
 		}
 	}
 	for(var i = 0; i < $(".requiredimg").length; i++) {
-		if($(".requiredimg").eq(i).attr("src") == "") {
+		if($(".requiredimg").eq(i).attr("src") == "" || $(".requiredimg").eq(i).attr("alt") == "") {
 			var required = $(".requiredimg").eq(i).parent().siblings(".masklistname").find(".text").text();
 			layer.msg(required + " 为必填项 请核对");
 			return false;

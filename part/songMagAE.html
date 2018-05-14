@@ -90,13 +90,13 @@
 						</select>
 					</div>
 				</div>
-				<div class="masklist">
+				<!--<div class="masklist">
 					<div class="masklistname"><span>*</span><span class="text">曲目标签</span>：</div>
 					<div class="masklistvalue">
-						<input type="text" name="" value="" id="Tags" class="required" />
+						<input type="text" name="" value="" id="Tags" class="" />
 						<div class="masklist_prompt">最多10个标签,多个标签请用","隔开</div>
 					</div>
-				</div>
+				</div>-->
 				<div class="masklist">
 					<div class="masklistname"><span>*</span><span class="text">曲目封面</span>：</div>
 					<div class="masklistvalue">
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="masklist">
-					<div class="masklistname"><span>*</span><span class="text">上传曲目</span>：</div>
+					<div class="masklistname"><span>*</span><span class="text">曲目</span>：</div>
 					<div class="masklistvalue">
 						<audio controls="controls" src="" id="showsong" class="requiredimg"></audio>
 						<div class="btn margintop8" onclick="uploadsong();" id="creatsong">本地上传</div>
@@ -166,7 +166,7 @@
 					melodyArtist: $("#Artist").val(),
 					melodyAlbum: $("#Album option:selected").text(),
 					melodyAlbumId: $("#Album option:selected").val(),
-					melodyTags: $("#Tags").val(),
+//					melodyTags: $("#Tags").val(),
 					melodySort: $("#melodySort").val(),
 					melodyAgeStart: $("#ages").val().split("-")[0],
 					melodyAgeEnd: $("#ages").val().split("-")[1],
@@ -209,7 +209,7 @@
 					melodyArtist: $("#Artist").val(),
 					melodyAlbum: $("#Album option:selected").text(),
 					melodyAlbumId: $("#Album option:selected").val(),
-					melodyTags: $("#Tags").val(),
+//					melodyTags: $("#Tags").val(),
 					melodySort: $("#melodySort").val(),
 					melodyAgeStart: $("#ages").val().split("-")[0],
 					melodyAgeEnd: $("#ages").val().split("-")[1],
