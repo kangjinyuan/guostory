@@ -12,6 +12,13 @@
 		<link rel="shortcut icon" href="../img/icon.png" type="image/x-icon" />
 		<link rel="stylesheet" href="../css/reset.css" />
 		<link rel="stylesheet" href="../css/comment.css" />
+		<script src="../js/jquery-1.9.1.min.js"></script>
+		<script src="../js/photoload.js"></script>
+		<script src="../js/photoloadinit.js"></script>
+		<script src="../js/upload.js"></script>
+		<script src="../layui/layui.all.js"></script>
+		<script src="../js/jquery.form.js"></script>
+		<script src="../js/comment.js"></script>
 	</head>
 
 	<body>
@@ -64,24 +71,32 @@
 					</div>
 				</div>
 				<form method="post" action="" enctype="multipart/form-data" id="coverImage" style="display: none;">
-					<input type="text" name="fileName" id="Imagetext" value="" />
+					<input type="text" name="" id="Imagetext" value="" />
 					<input type="file" name="file" id="ImageFile" value="" onchange="subimtimgBtn();" />
 				</form>
 				<div class="maskbtnbox">
 					<div class="btn" onclick="save();" id="creatsave">确定</div>
 				</div>
+				<div class="maskbtnbox" id="hbEwmbox">
+					<div id="hbEwm"></div>
+					<div>
+						<a id="download" download=""></a>
+						<div class="maskbtnbox" style="width: 100%;">
+							<div class="btn margintop8" onclick="downerweima('hbEwm','albumName','绘本二维码');">下载绘本二维码</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
-	<script src="../js/jquery-1.9.1.min.js"></script>
-	<script src="../js/photoload.js"></script>
-	<script src="../js/photoloadinit.js"></script>
-	<script src="../js/uploadimg.js"></script>
-	<script src="../layui/layui.all.js"></script>
-	<script src="../js/vue.min.js"></script>
-	<script src="../js/jquery.form.js"></script>
-	<script src="../js/comment.js"></script>
 	<script>
+		function downerweima(canvas, name, type) {
+			var canvas = $('#' + canvas).find("canvas").get(0);
+			var saveurl = canvas.toDataURL('image/png');
+			$("#download").attr("download", $("#" + name).val() + type);
+			$("#download").attr('href', saveurl).get(0).click();
+			return false;
+		}
 		//		新建song
 		function save() {
 			var checkI = checkInput();
@@ -96,23 +111,14 @@
 					albumTag: $("#albumTag").val()
 				};
 				paras = JSON.stringify(paras);
-				$.ajax({
-					type: 'POST',
-					url: url + 'album/add.do',
-					contentType: "application/json;charset=UTF-8",
-					data: paras,
-					dataType: 'json',
-					success: function(data) {
-						if(data.state == true) {
-							layer.alert('新建成功', function() {
-								parent.layer.close(index);
-								window.parent.loaddata();
-							});
-						} else {
-							layer.msg('新建失败');
-						}
-					}
-				});
+				crequest('POST', 'album/add.do', 1, paras, function(res) {
+					layer.alert('新建成功', function() {
+						parent.layer.close(index);
+						window.parent.loaddata();
+					});
+				}, function() {
+					layer.msg('新建失败');
+				})
 			}
 		}
 		//		修改数据
@@ -130,23 +136,14 @@
 					albumTag: $("#albumTag").val()
 				};
 				paras = JSON.stringify(paras);
-				$.ajax({
-					type: 'POST',
-					url: url + 'album/update.do',
-					contentType: "application/json;charset=UTF-8",
-					data: paras,
-					dataType: 'json',
-					success: function(data) {
-						if(data.state == true) {
-							layer.alert('修改成功', function() {
-								parent.layer.close(index);
-								window.parent.loaddata();
-							});
-						} else {
-							layer.msg("修改失败");
-						}
-					}
-				});
+				crequest('POST', 'album/update.do', 1, paras, function(res) {
+					layer.alert('修改成功', function() {
+						parent.layer.close(index);
+						window.parent.loaddata();
+					});
+				}, function() {
+					layer.msg("修改失败");
+				})
 			}
 		}
 		//		加载分类
@@ -155,21 +152,16 @@
 				page: page
 			};
 			paras = JSON.stringify(paras);
-			$.ajax({
-				type: 'POST',
-				url: url + 'melody/queryList.do',
-				contentType: "application/json;charset=UTF-8",
-				data: paras,
-				dataType: 'json',
-				success: function(data) {
-					var songclassify = "";
-					for(var i = 0; i < data.data.categoryList.length; i++) {
-						songclassify += "<option value='" + data.data.categoryList[i].categoryName + "'>" + data.data.categoryList[i].categoryName + "</option>";
-					}
-					$("#albumTag").append(songclassify);
-					okcallback();
+			crequest('POST', 'melody/queryList.do', 1, paras, function(res) {
+				var songclassify = "";
+				for(var i = 0; i < res.data.categoryList.length; i++) {
+					songclassify += "<option value='" + res.data.categoryList[i].categoryName + "'>" + res.data.categoryList[i].categoryName + "</option>";
 				}
-			});
+				$("#albumTag").append(songclassify);
+				okcallback();
+			}, function() {
+				layer.msg('分类加载失败');
+			})
 		}
 	</script>
 
